@@ -1,0 +1,11 @@
+{
+  "name": "irvyne/iim-restart-php",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thibaud BARDIN",
+      "email": "thibaud.bardin@gmail.com"
+    }
+  ]
+}
