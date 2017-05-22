@@ -7,5 +7,10 @@
       "name": "Thibaud BARDIN",
       "email": "thibaud.bardin@gmail.com"
     }
-  ]
+  ],
+  "require": {
+    "symfony/var-dumper": "^3.2",
+    "twig/twig": "^2.3",
+    "imagine/imagine": "^0.7.1"
+  }
 }
