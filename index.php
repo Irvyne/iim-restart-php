@@ -11,9 +11,13 @@ require 'config.php';
  * Delete => DELETE
  */
 
-$sql = 'SELECT id, username, email FROM user WHERE username="admin" OR password="blabla"';
+getUsers($pdo);
+//createUser($pdo, 'admin2'.mt_rand(), 'efzefezf@ezfez.fr'.mt_rand(), 'admin2');
 
-dump($pdo->query($sql)->fetch(PDO::FETCH_ASSOC));
+
+$sql = 'SELECT id, email, username FROM user WHERE username="admin" AND password="blabla"';
+
+//dump($pdo->query($sql)->fetch(PDO::FETCH_ASSOC));
 
 
 // Trouver un moyen de faire un dump($user);
