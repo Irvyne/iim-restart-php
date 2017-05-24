@@ -12,6 +12,9 @@
         .navbar label {
             color: #fff;
         }
+        .navbar {
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -29,11 +32,22 @@
                 <a class="nav-link" href="#">Contact</a>
             </li>
         </ul>
+        <?php
+            if (isset($_SESSION['isConnected']) && $_SESSION['isConnected'] === true) {
+        ?>
+        Bonjour <?php echo $_SESSION['username']; ?>
+        <?php
+            } else {
+        ?>
         <form action="login.php" method="post" class="form-inline my-2 my-lg-0">
             <input name="username" class="form-control mr-sm-2" placeholder="Username" required>
             <input name="password" type="password" class="form-control mr-sm-2" placeholder="Password" required>
             <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Login">
         </form>
+        <?php
+            }
+        ?>
+
     </div>
 </div>
 

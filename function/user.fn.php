@@ -55,7 +55,7 @@ function loginUser(PDO $pdo, $username, $password)
         return false;
     }
 
-    return password_verify($password, $user['password']);
+    return password_verify($password, $user['password']) ? $user : false;
 }
 
 // UPDATE

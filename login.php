@@ -20,11 +20,22 @@ require 'config.php';
 $username = $_POST['username'] ?? null;
 $password = $_POST['password'] ?? null;
 
+/**
+ * loginUser()
+ *   FAILURE =>   false
+ *   SUCCESS =>   ['id' => 1, 'username' => 'admin', ...]
+ */
+
 if (!empty($username) && !empty($password)) {
-    if (loginUser($pdo, $username, $password) === true) {
+    $user = loginUser($pdo, $username, $password);
+
+    if ($user !== false) {
         echo 'Connected!!!';
 
         $_SESSION['isConnected'] = true;
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
 
         header('Location: admin.php');
     } else {

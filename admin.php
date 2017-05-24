@@ -3,6 +3,10 @@
 session_start();
 var_dump($_SESSION['isConnected']);
 
+if ($_SESSION['isConnected'] === true) {
+    echo 'Bienvenue '.$username;
+}
+
 ?>
 
 

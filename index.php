@@ -12,7 +12,6 @@ require 'config.php';
  */
 
 
-
 //createUser($pdo, 'admin2'.mt_rand(), 'efzefezf@ezfez.fr'.mt_rand(), 'admin2');
 
 $sql = 'SELECT id, email, username FROM user WHERE username="admin" AND password="blabla"';
