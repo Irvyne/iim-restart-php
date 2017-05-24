@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/app.css">
+    <style>
+        .navbar label {
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
 <div class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
@@ -24,9 +29,9 @@
                 <a class="nav-link" href="#">Contact</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input type="email" class="form-control mr-sm-2" placeholder="Email">
-            <input type="password" class="form-control mr-sm-2" placeholder="password">
+        <form action="login.php" method="post" class="form-inline my-2 my-lg-0">
+            <input name="username" class="form-control mr-sm-2" placeholder="Username" required>
+            <input name="password" type="password" class="form-control mr-sm-2" placeholder="Password" required>
             <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Login">
         </form>
     </div>

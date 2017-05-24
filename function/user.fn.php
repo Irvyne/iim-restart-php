@@ -44,7 +44,18 @@ function getUser(PDO $pdo, $id)
 
 function loginUser(PDO $pdo, $username, $password)
 {
+    $sql = 'SELECT * FROM user WHERE username = :username';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        'username' => $username,
+    ]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    if ($user === false) {
+        return false;
+    }
+
+    return password_verify($password, $user['password']);
 }
 
 // UPDATE
