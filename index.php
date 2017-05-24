@@ -11,7 +11,10 @@ require 'config.php';
  * Delete => DELETE
  */
 
-getUsers($pdo);
+dump(
+    getUsers($pdo)
+);
+
 //createUser($pdo, 'admin2'.mt_rand(), 'efzefezf@ezfez.fr'.mt_rand(), 'admin2');
 
 

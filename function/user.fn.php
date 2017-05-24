@@ -1,4 +1,15 @@
 <?php
+
+/**
+ * CRUD
+ *
+ * Create => INSERT
+ * Read   => SELECT
+ * Update => UPDATE
+ * Delete => DELETE
+ */
+
+
 // CREATE
 function createUser(PDO $pdo, $username, $email, $password)
 {
@@ -15,15 +26,20 @@ function createUser(PDO $pdo, $username, $email, $password)
 // READ
 function getUsers(PDO $pdo)
 {
-    $sql = 'SELECT * FROM user';
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+    $sql = 'SELECT id, username, email FROM user';
+
+    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function getUser(PDO $pdo, $id)
 {
+    $sql = 'SELECT id, username, email FROM user WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        'id' => $id,
+    ]);
 
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 function loginUser(PDO $pdo, $username, $password)
@@ -34,11 +50,23 @@ function loginUser(PDO $pdo, $username, $password)
 // UPDATE
 function updateUser(PDO $pdo, $id, $email = null, $password = null)
 {
+    $sql = 'UPDATE user SET email = :email, password = :password WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
 
+    return $stmt->execute([
+        'id'       => $id,
+        'email'    => $email,
+        'password' => password_hash($password, PASSWORD_BCRYPT),
+    ]);
 }
 
 // DELETE
 function deleteUser(PDO $pdo, $id)
 {
+    $sql = 'DELETE FROM user WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
 
+    return $stmt->execute([
+        'id' => $id,
+    ]);
 }
