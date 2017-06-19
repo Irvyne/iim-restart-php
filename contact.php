@@ -7,5 +7,6 @@ require 'config.php';
  ************/
 
 echo $twig->render('contact.html.twig', [
-    'title' => 'contact me :D'
+    'title' => 'contact me :D',
+    'isConnected' => isset($_SESSION['isConnected']),
 ]);

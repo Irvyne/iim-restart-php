@@ -19,18 +19,30 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#"><?php echo "Rick"; ?><span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="admin.php">Admin</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="contact.php">Contact</a>
-            </li>
+            {% if isConnected|default(false) %}
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.php">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_articles.php">Articles</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">Contact</a>
+                </li>
+            {% endif %}
         </ul>
-        <form action="login.php" method="post" class="form-inline my-2 my-lg-0">
-            <input name="username" class="form-control mr-sm-2" placeholder="Username" required>
-            <input name="password" type="password" class="form-control mr-sm-2" placeholder="Password" required>
-            <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Login">
-        </form>
+        {% if isConnected|default(false) %}
+            <form action="logout.php" method="post" class="form-inline my-2 my-lg-0">
+                <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Logout">
+            </form>
+        {% else %}
+            <form action="login.php" method="post" class="form-inline my-2 my-lg-0">
+                <input name="username" class="form-control mr-sm-2" placeholder="Username" required>
+                <input name="password" type="password" class="form-control mr-sm-2" placeholder="Password" required>
+                <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Login">
+            </form>
+        {% endif %}
     </div>
 </div>
 
