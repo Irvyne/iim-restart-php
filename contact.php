@@ -6,6 +6,6 @@ require 'config.php';
  * TEMPLATE *
  ************/
 
-echo $twig->render('index.html.twig', [
-    'title' => 'homepage!',
+echo $twig->render('contact.html.twig', [
+    'title' => 'contact me :D'
 ]);
