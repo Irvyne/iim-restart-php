@@ -14,6 +14,9 @@ try {
         $credentials['mysql']['username'],
         $credentials['mysql']['password']
     );
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (Throwable $t) {
     echo "An error occurred, code ".$t->getCode()."!";
 }
+
+session_start();

@@ -14,33 +14,30 @@
 <body>
 <div class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
     <div class="container d-flex justify-content-between">
-        <a href="#" class="navbar-brand"><i class="fa fa-ambulance"></i> Rick and Morty</a>
+        <a href="index.php" class="navbar-brand"><i class="fa fa-ambulance"></i> Rick and Morty</a>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="admin.php">Admin</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="contact.php">Contact</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input type="email" class="form-control mr-sm-2" placeholder="Email">
-            <input type="password" class="form-control mr-sm-2" placeholder="password">
-            <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Login">
-        </form>
+        {% if isConnected|default(false) %}
+            <form action="logout.php" method="post" class="form-inline my-2 my-lg-0">
+                <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Logout">
+            </form>
+        {% else %}
+            <form action="login.php" method="post" class="form-inline my-2 my-lg-0">
+                <input name="email" type="email" class="form-control mr-sm-2" placeholder="Email">
+                <input name="password" type="password" class="form-control mr-sm-2" placeholder="Password">
+                <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Login">
+            </form>
+        {% endif %}
     </div>
 </div>
 
-{% block body %}
-    <h1>ezfzefezfez</h1>
-    <h1>ezfzefezfez</h1>
-    <h1>ezfzefezfez</h1>
-    <h1>ezfzefezfez</h1>
-    <h1>ezfzefezfez</h1>
-{% endblock %}
+{% block body %}{% endblock %}
 
 <footer class="text-muted">
     <div class="container">
