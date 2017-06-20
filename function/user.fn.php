@@ -21,8 +21,14 @@
  */
 function createUser(PDO $pdo, $username, $email, $password)
 {
-    // Renvoyer un boolean, true si l'utilisateur est crée, false dans l'autre cas.
-    // password_hash("password", CRYPT_BLOWFISH);
+    $sql = "INSERT INTO user (username, email, password) VALUES (:username, :email, :password)";
+    $pdoStatement = $pdo->prepare($sql);
+
+    return $pdoStatement->execute([
+        'username' => $username,
+        'email'    => $email,
+        'password' => password_hash($password, CRYPT_BLOWFISH),
+    ]);
 }
 
 /**
@@ -34,7 +40,9 @@ function createUser(PDO $pdo, $username, $email, $password)
  */
 function getUsers(PDO $pdo)
 {
+    $sql = "SELECT id, username, email FROM user";
 
+    return $pdo->query($sql)->fetchAll();
 }
 
 /**
@@ -43,11 +51,17 @@ function getUsers(PDO $pdo)
  * @param PDO $pdo
  * @param int $id
  *
- * @return array
+ * @return array|bool false if not user is found.
  */
 function getUser(PDO $pdo, $id)
 {
+    $sql = "SELECT id, username, email FROM user WHERE id = :id";
+    $pdoStatement = $pdo->prepare($sql);
+    $pdoStatement->execute([
+        'id' => $id,
+    ]);
 
+    return $pdoStatement->fetch();
 }
 
 /**
@@ -61,7 +75,14 @@ function getUser(PDO $pdo, $id)
  */
 function updateUser(PDO $pdo, $id, $password)
 {
+    $sql = "UPDATE user SET password = :password WHERE id = :id";
+    $pdoStatement = $pdo->prepare($sql);
 
+    return $pdoStatement->execute([
+        'password' => password_hash($password, CRYPT_BLOWFISH),
+        'id'       => $id,
+    ]);
+    //$pdoStatement->columnCount()
 }
 
 /**
@@ -74,7 +95,13 @@ function updateUser(PDO $pdo, $id, $password)
  */
 function deleteUser(PDO $pdo, $id)
 {
+    $sql = "DELETE FROM user WHERE id = :id";
+    $pdoStatement = $pdo->prepare($sql);
 
+    return $pdoStatement->execute([
+        'id' => $id,
+    ]);
+    //$pdoStatement->columnCount()
 }
 
 
@@ -82,13 +109,29 @@ function deleteUser(PDO $pdo, $id)
 
 /**
  * @param PDO    $pdo
- * @param string $username
+ * @param string $email
  * @param string $password
  *
  * @return array|false false si l'utilisateur n'existe pas ou le mot de passe est invalide, array avec les données
  *                     utilisateur s'il existe
  */
-function login(PDO $pdo, $username, $password)
+function login(PDO $pdo, $email, $password)
 {
+    $sql = "SELECT * FROM user WHERE email = :email";
+    $pdoStatement = $pdo->prepare($sql);
+    $pdoStatement->execute([
+        'email' => $email,
+    ]);
 
+    $user = $pdoStatement->fetch();
+
+    if (!$user)
+        return false;
+
+    if (!password_verify($password, $user['password']))
+        return false;
+
+    return $user;
+
+    //return password_verify($password, $user['password']) ? $user : false;
 }

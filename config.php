@@ -1,6 +1,7 @@
 <?php
 
 require "vendor/autoload.php";
+require "function/user.fn.php";
 
 $credentials = require "credentials.php";
 $loader = new Twig_Loader_Filesystem(__DIR__.'/template');

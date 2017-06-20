@@ -16,12 +16,18 @@
     <div class="container d-flex justify-content-between">
         <a href="index.php" class="navbar-brand"><i class="fa fa-ambulance"></i> Rick and Morty</a>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="admin.php">Admin</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="contact.php">Contact</a>
-            </li>
+            {% if isConnected|default(false) %}
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.php">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_user.php">Admin User</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">Contact</a>
+                </li>
+            {% endif %}
         </ul>
         {% if isConnected|default(false) %}
             <form action="logout.php" method="post" class="form-inline my-2 my-lg-0">
