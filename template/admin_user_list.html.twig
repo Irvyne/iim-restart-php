@@ -1,7 +1,39 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .btn-creation {
+            margin: 30px auto;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        Array.from(document.getElementsByClassName('btn-confirm')).forEach(function (button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                if (confirm("Are you sure?")) {
+                    return true;
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
     <div class="container">
+
+        <div class="row">
+            <a href="admin_user_create.php" class="btn btn-outline-success btn-creation">
+                <i class="fa fa-plus"></i>
+                Create user
+            </a>
+        </div>
+
         <table class="table">
             <thead class="thead-inverse">
             <tr>
@@ -19,8 +51,8 @@
                     <td>{{ user.email }}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Actions">
-                            <a href="#" class="btn btn-outline-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
-                            <a href="admin_user_delete.php?id={{ user.id }}" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                            <a href="admin_user_edit.php?id={{ user.id }}" class="btn btn-outline-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                            <a href="admin_user_delete.php?id={{ user.id }}" class="btn btn-outline-danger btn-confirm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                         </div>
                     </td>
                 </tr>

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .btn-creation {
+            margin: 30px auto;
+        }
+        .container-admin {
+            margin-top: 50px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% if isError|default(false) %}
+        <div class="alert alert-danger text-center" role="alert">
+            <strong>Oh snap!</strong> An error occurred, please try again.
+        </div>
+    {% endif %}
+    <div class="container container-admin">
+
+        <h3 class="text-center">{{ user.username }} <small>{{ user.email }}</small></h3>
+
+        <form method="post" action="" class="col-6 offset-3">
+            <div class="form-group">
+                <label for="oldPassword">Old Password</label>
+                <input name="oldPassword" type="password" minlength="3" maxlength="255" class="form-control" id="oldPassword" placeholder="Old Password" required>
+            </div>
+            <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input name="newPassword" type="password" minlength="3" maxlength="255" class="form-control" id="newPassword" placeholder="New Password" required>
+            </div>
+            <div class="abc text-center">
+                <a href="admin_user.php" class="btn btn-outline-danger">
+                    <i class="fa fa-remove"></i>
+                    Cancel
+                </a>
+                <button type="submit" class="btn btn-outline-success">
+                    <i class="fa fa-pencil"></i>
+                    Change password
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
